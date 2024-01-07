@@ -1,3 +1,7 @@
+-- In a real application, you would use a migration tool like Flyway or Liquibase
+-- to manage your database schema. For the sake of simplicity, we will use a
+-- simple SQL script to create our database schema.
+
 insert into AUTHORS(name, age) values('J. R. R. Tolkien', 45);
 insert into AUTHORS(name, age) values('J. K. Rowling', 56);
 
