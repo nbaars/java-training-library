@@ -49,6 +49,13 @@ You can access the application at http://localhost:8080/libary
 
 **Make sure no Docker containers are running before starting the application with docker-compose.**
 
+You can inspect/stop a running PostgreSQL instance this with:
+
+```bash
+docker ps 
+docker stop <container-id>
+````
+
 First build the application:
 
 ```bash
