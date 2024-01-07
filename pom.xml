@@ -104,7 +104,6 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
@@ -125,6 +124,11 @@
   <build>
     <resources>
       <resource>
+        <filtering>false</filtering>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+      <!-- Copy the Dockerfile to the build directory and apply filtering, meaning that the placeholders will be replaced with the actual values -->
+      <resource>
         <targetPath>${project.build.directory}</targetPath>
         <filtering>true</filtering>
         <directory>${basedir}/src/main/docker</directory>
@@ -132,6 +136,7 @@
     </resources>
 
     <plugins>
+      <!-- This plugin is used to package the application as a jar file -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

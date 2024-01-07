@@ -4,7 +4,7 @@ Welcome to the Library Management System. This is a simple application that allo
 
 ## Running the application
 
-### Run with IntelliJ
+### Start PostgreSQL database
 
 Before starting the application for the first time you will need to start the PostgreSQL database. You can do this by
 running the following command:
@@ -13,17 +13,41 @@ running the following command:
 docker-compose up -d postgresql
 ```
 
+### Run with IntelliJ
+
+**First start the PostgreSQL database as described above.**
+
 In IntelliJ, you can run the application by right-clicking on the `Application` class and selecting `Run 'Application'`.
 
 ### Run with Maven
+
+**First start the PostgreSQL database as described above.**
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
+### Run from command line
+
+**First start the PostgreSQL database as described above.**
+
+Build the application:
+
+```bash
+./mvnw clean package 
+```
+
+Then run the application:
+
+```bash
+    java -jar target/java-training-library-1.0-SNAPSHOT.jar
+```
+
 You can access the application at http://localhost:8080/libary
 
 ### Run with docker-compose
+
+**Make sure no Docker containers are running before starting the application with docker-compose.**
 
 First build the application:
 
