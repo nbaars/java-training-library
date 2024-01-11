@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: library
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: echo 'SELECT VERSION();' | psql --host localhost --port 5432 --user test --dbname library
+      interval: 3s
+      timeout: 1s
+
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass test
+
+  library-management-system:
+    build:
+      context: target
+    image: 'java-training-library:${DOCKER_TAG:-develop}'
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/library
+      SPRING_DATASOURCE_USERNAME: test
+      SPRING_DATASOURCE_PASSWORD: test
+
+volumes:
+  postgres-data:

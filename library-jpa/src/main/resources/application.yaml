@@ -1,0 +1,44 @@
+scan.packages: com.example.library.jdbc
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc: DEBUG
+        transaction: DEBUG
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/library
+    username: test
+    password: test
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+      defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+  cache:
+    redis:
+      enable-statistics: true
+      time-to-live: PT15M
+    cache-names: books
+    type: redis
+  data:
+    redis:
+      client-type: lettuce
+      password: test
+      host: localhost
+      port: 6379
+
+
+
+
